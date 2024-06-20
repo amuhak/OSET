@@ -1,6 +1,7 @@
 import numpy as np
 import argparse
 
+
 def phase_calculator(peaks):
     """
     phase_calculator - ECG phase calculation from a given set of R-peaks.
@@ -36,7 +37,7 @@ def phase_calculator(peaks):
 
     for i in range(len(I) - 1):
         m = I[i + 1] - I[i]
-        phasepos[I[i] + 1:I[i + 1] + 1] = np.linspace(2 * np.pi / m, 2 * np.pi, m, endpoint=False)
+        phasepos[I[i] + 1:I[i + 1] + 1] = np.linspace(2 * np.pi / m, 2 * np.pi, m)
 
     m = I[1] - I[0]
     L = len(phasepos[:I[0] + 1])
@@ -44,7 +45,7 @@ def phase_calculator(peaks):
 
     m = I[-1] - I[-2]
     L = len(phasepos[I[-1] + 1:])
-    phasepos[I[-1] + 1:] = np.linspace(2 * np.pi / m, L * 2 * np.pi / m, L, endpoint=False)
+    phasepos[I[-1] + 1:] = np.linspace(2 * np.pi / m, L * 2 * np.pi / m, L)
 
     phasepos = np.mod(phasepos, 2 * np.pi)
 
@@ -75,4 +76,3 @@ if __name__ == "__main__":
         formatter_class=argparse.RawTextHelpFormatter,
     )
     args = parser.parse_args()
-
